@@ -1,0 +1,21 @@
+# docker-compose up
+
+version: '3'
+services:
+  redis:
+    image: redis:latest
+    container_name: jelly_redis
+
+  mysql:
+    image: mysql:latest
+    volumes:
+      - ./docker/data:/var/lib/mysql/data
+    environment:
+      MYSQL_ROOT_PASSWORD: store
+      MYSQL_USER: jelly-store
+      MYSQL_PASSWORD: store
+      MYSQL_DATABASE: jelly
+    container_name: jelly_db
+    ports:
+      - 3306:3306
+
