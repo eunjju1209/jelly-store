@@ -11,10 +11,8 @@ services:
     volumes:
       - ./docker/data:/var/lib/mysql/data
     environment:
-      MYSQL_ROOT_PASSWORD: store
-      MYSQL_USER: jelly-store
-      MYSQL_PASSWORD: store
-      MYSQL_DATABASE: jelly
+      MYSQL_USER: jellystore
+      MYSQL_PASSWORD:
     container_name: jelly_db
     ports:
       - 3306:3306
