@@ -8,11 +8,14 @@ import * as path from 'path';
 
 import { AppController } from '../app.controller';
 import { AppService } from '../app.service';
+import { AuthModule } from '../auth/auth.module';
 
 
 @Module({
   imports: [
     ConfigModule.load(path.resolve(__dirname, 'config', '**/!(*.d).{ts,js}')),
+    // TypeOrmModule.forRoot(),
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
