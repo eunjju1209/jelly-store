@@ -10,12 +10,20 @@ import { AppController } from '../app.controller';
 import { AppService } from '../app.service';
 import { AuthModule } from '../auth/auth.module';
 
+// db model
+import { User } from '../model/user.entity';
+import { UsersModule } from '../users/users.module';
+
 
 @Module({
   imports: [
     ConfigModule.load(path.resolve(__dirname, 'config', '**/!(*.d).{ts,js}')),
     // TypeOrmModule.forRoot(),
-    AuthModule
+    TypeOrmModule.forRoot({
+      'entities': [User]
+    }),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

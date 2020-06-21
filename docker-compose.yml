@@ -15,5 +15,12 @@ services:
       MYSQL_PASSWORD:
     container_name: jelly_db
     ports:
-      - 3306:3306
+      - "3306:3306"
+
+    jellystore:
+      # TODO: gcp 에  올리고 이미지를  gcp 에서 받아서 실행 시켜보자
+      image: jellystore
+      container_name: jellystore
+      ports:
+        - "80:8080"
 

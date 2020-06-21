@@ -46,7 +46,7 @@ class ConfigService {
       password: configuration().database.password,
       database: configuration().database.database,
 
-      entities: ['**/*.entity{.ts,.js}'],
+      entities: ['**/*.model{.ts,.js}'],
 
       migrationsTableName: 'migration',
 

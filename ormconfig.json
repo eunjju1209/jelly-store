@@ -1,0 +1,10 @@
+{
+  "type": "mysql",
+  "host": "34.64.158.197",
+  "port": 3306,
+  "username": "jellystore",
+  "password": "",
+  "database": "store",
+  "synchronize": true,
+  "entities": ["dist/**/*.entity{.ts,.js}"]
+}
