@@ -15,9 +15,8 @@ export class UsersService {
     ) {
   }
 
-  async findOne(username: string): Promise<User | undefined> {
-    // return this.users.find(user => user.name === username);
-    return undefined;
+  async findOne(login) {
+    return await this.userRepository.findOneOrFail({ userId: login.userId, password: login.password });
   }
 
   // 회원가입 유저생성
@@ -32,8 +31,8 @@ export class UsersService {
     return count == 0 ? true: false;
   }
 
-
-  // async findOneByToken(token: string): Promise<string> {
-  //
-  // }
+  async findById(id: number): Promise<User> {
+    console.log(`id ==> ${id}`);
+    return await this.userRepository.findOne({ id: id });
+  }
 }

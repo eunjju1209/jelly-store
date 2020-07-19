@@ -1,6 +1,9 @@
+import * as jwt from 'jsonwebtoken';
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
- import { JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
+import { User } from 'src/model/user.entity';
+import { JwtPayload } from '../dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -30,9 +33,40 @@ export class AuthService {
   }
 
   async login(user: any) {
+    console.log(`----------------------`);
+    console.log(user);
     const payload = { username: user.username, sub:user.userId  };
     return {
       accessToken: this.jwtService.sign(payload),
     };
+  }
+
+  // 토큰 생성
+  async createToken(user: User) {
+
+    // token 만료시간
+    const expiresIn = 3600;
+
+    const accessToken = jwt.sign(
+      {
+        id: user.id,
+        userId: user.userId
+      },
+      'Codebrains',
+      { expiresIn }
+    );
+
+    return {
+      expiresIn,
+      accessToken
+    };
+  }
+
+  // 생성된 토큰으로 아이디 찾기
+  async validateUserToken(payload: JwtPayload): Promise<User> {
+
+    console.log(`payload ==> ${payload}`);
+    return await this.usersService.findById(payload.id);
+    // return await this.usersService.findById(pay)
   }
 }

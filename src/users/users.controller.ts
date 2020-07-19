@@ -1,16 +1,17 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Request, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
-import {toCamel, toSnake } from 'snake-camel';
+import { toCamel, toSnake } from 'snake-camel';
 import { User } from '../model/user.entity';
 import { UsersService } from '../users/users.service';
 import { UserDto } from './user.dto';
+import { LocalAuthGuard } from '../auth/local-auth.guard';
+import { AuthService } from '../auth/auth.service';
 
 @Controller('users')
 export class UsersController {
 
   // constructor(private service: UsersService) { }
-  constructor(private readonly service: UsersService) { }
+  constructor(private readonly authService: AuthService) { }
 
   @Get('users')
   @UseGuards(AuthGuard('local'))
@@ -41,11 +42,12 @@ export class UsersController {
   }
    */
 
+  /*
   // 회원가입
   @Post('signup')
   async signUp(@Req() request:Request, @Body() createUserDto: UserDto) {
 
-    const { userId, password, role } = toCamel(request.query);
+    const { userId, password, role } = toCamel(request);
 
     // 중복 체크 해주기
     const duplicate = await this.duplicate(userId);
@@ -54,7 +56,7 @@ export class UsersController {
       return false;
     }
 
-    const result = await this.service.create({
+    const result = await this.UsersService.create({
       userId: userId,
       password: password,
       role: {
@@ -65,6 +67,7 @@ export class UsersController {
     return true;
   }
 
+
   // 중복체크
   async duplicate(userId: string)  {
     if (userId.length < 1) {
@@ -73,10 +76,14 @@ export class UsersController {
 
     return await this.service.duplicate(userId);
   }
+   */
 
   // 로그인
+  @UseGuards(LocalAuthGuard)
   @Post('signin')
-  signin() {
+  async signin(@Request() req) {
+    console.log(req);
+
     return true;
   }
 

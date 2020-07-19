@@ -1,0 +1,11 @@
+#cloudbuild.yaml
+#cloudbuild.yaml 에다가 docker-compose 해준 이유는 내가 GCP 에서 trigger 에 build 방법을 cloudbild.yaml 로 설정해줘서
+# 빌드 하는 방법은 git hub 에 브랜치가 올라갈때, cloudbuild를 보고 빌드해준다.
+
+# cloudbuild 에 기본적인 조합은 steps -> { name, args } 기본적인 조합으로 알 수 있다.
+steps:
+  - name: 'docker/compose:1.19.0'
+    args: ['up', '-d']
+  - name: 'asia.gcr.io/industrial-keep-279205/jellystire'
+    args: ['tag', 'jellystore:latest', 'asia.gcr.io/industrial-keep-279205/jellystire:latest']
+    images: ['asia.gcr.io/industrial-keep-279205/jellystore:latest']

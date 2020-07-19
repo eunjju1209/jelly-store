@@ -4,7 +4,9 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { User } from '../model/user.entity';
 
-import { PassportModule } from '@nestjs/passport';
+import { AuthService } from '../auth/auth.service';
+import { LocalStrategy } from '../auth/local.strategy';
+import { JwtStrategy } from '../auth/jwt.strategy';
 
 @Module({
   /** for feature 무엇인지 확인해보기
@@ -12,7 +14,6 @@ import { PassportModule } from '@nestjs/passport';
    * **/
   imports: [TypeOrmModule.forFeature([User])],
   providers: [UsersService],
-  controllers: [UsersController],
   exports: [UsersService],
 })
 export class UsersModule {}
