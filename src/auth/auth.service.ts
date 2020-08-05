@@ -3,7 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/model/user.entity';
-import { JwtPayload } from '../dto/login.dto';
+import { JwtPayload } from 'src/dto/login.dto';
+import { jwtConstants } from './constants';
 
 @Injectable()
 export class AuthService {
@@ -12,14 +13,6 @@ export class AuthService {
     private usersService: UsersService,
     private jwtService: JwtService
   ) {}
-
-  // async validateUser(token: string): Promise<any> {
-  //   // validate if token passed along with HTTP request
-  //   // is associated with any registered account in the database
-  //
-  //   // return await this.usersService.findOneByToken(token);
-  //   return await this.usersService.findOne(token);
-  // }
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(username);
@@ -52,7 +45,7 @@ export class AuthService {
         id: user.id,
         userId: user.userId
       },
-      'Codebrains',
+      jwtConstants.secret,
       { expiresIn }
     );
 
@@ -64,9 +57,6 @@ export class AuthService {
 
   // 생성된 토큰으로 아이디 찾기
   async validateUserToken(payload: JwtPayload): Promise<User> {
-
-    console.log(`payload ==> ${payload}`);
     return await this.usersService.findById(payload.id);
-    // return await this.usersService.findById(pay)
   }
 }
