@@ -7,11 +7,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { configService } from './config/config.service';
 import * as path from 'path';
 import { AuthService } from './auth/auth.service';
-import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { BrandModule } from './app/brand/brand.module';
+import { BrandService } from './app/brand/brand.service';
 
 @Module({
   imports: [
@@ -20,7 +21,9 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     UsersModule
   ],
-  controllers: [AppController, UsersController],
-  providers: [AppService, UsersService, AuthService]
+  controllers: [
+    AppController
+  ],
+  providers: [AppService, UsersService, AuthService, BrandService]
 })
 export default class AppModule {}

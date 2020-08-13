@@ -1,4 +1,4 @@
-import { Body, Controller, Request, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Request, Get, Post, Req, UseGuards, HttpStatus, Response } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { toCamel, toSnake } from 'snake-camel';
 import { User } from '../model/user.entity';
@@ -6,43 +6,17 @@ import { UsersService } from '../users/users.service';
 import { UserDto } from './user.dto';
 import { LocalAuthGuard } from '../auth/local-auth.guard';
 import { AuthService } from '../auth/auth.service';
+import { LoginUserDto } from '../dto/login.dto';
 
 @Controller('users')
 export class UsersController {
 
   // constructor(private service: UsersService) { }
-  constructor(private readonly authService: AuthService) { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UsersService
+  ) { }
 
-  @Get('users')
-  @UseGuards(AuthGuard('local'))
-    findAll() {
-    return []
-  }
-
-  /* 회원가입
-  @Post('signup')
-  signUp(@Req() request: Request, createUserDto: UserDto): boolean {
-
-    // snake case to camel case convert
-    const { userId, password, role } = toCamel(request.query);
-    // 값 validate 체크
-
-    // UsersService.create({ userId: userId, password: password, role: role });
-    // this.service.create({ userId: userId, password: password, role: role });
-    this.service.create({
-      "userId": userId,
-      "password": password,
-      "role": {
-        'type': 'user'
-      }
-    });
-
-
-    return true;
-  }
-   */
-
-  /*
   // 회원가입
   @Post('signup')
   async signUp(@Req() request:Request, @Body() createUserDto: UserDto) {
@@ -56,7 +30,7 @@ export class UsersController {
       return false;
     }
 
-    const result = await this.UsersService.create({
+    const result = await this.userService.create({
       userId: userId,
       password: password,
       role: {
@@ -67,24 +41,31 @@ export class UsersController {
     return true;
   }
 
-
   // 중복체크
   async duplicate(userId: string)  {
     if (userId.length < 1) {
       return false;
     }
 
-    return await this.service.duplicate(userId);
+    return await this.userService.duplicate(userId);
   }
-   */
 
   // 로그인
-  @UseGuards(LocalAuthGuard)
   @Post('signin')
-  async signin(@Request() req) {
-    console.log(req);
+  async signin(@Response() response, @Body() login: LoginUserDto) {
+    // TODO : dto 가기전에 camel 케이스로 먼저 가도록 변경
+    const req = toCamel(login);
+    const user = await this.userService.findOne(req);
 
-    return true;
+    if (!user) {
+      return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        messsage: 'User Not Found',
+      });
+    }
+
+    // token 만들어주기
+    const token = await this.authService.createToken(user);
+    return response.status(HttpStatus.OK).json(token);
   }
 
 }

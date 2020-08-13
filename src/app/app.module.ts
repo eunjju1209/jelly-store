@@ -13,6 +13,7 @@ import { AuthModule } from '../auth/auth.module';
 // db model
 import { User } from '../model/user.entity';
 import { UsersModule } from '../users/users.module';
+import { BrandModule } from './brand/brand.module';
 
 
 @Module({
@@ -24,6 +25,7 @@ import { UsersModule } from '../users/users.module';
     }),
     AuthModule,
     UsersModule,
+    BrandModule,
   ],
   controllers: [AppController],
   providers: [AppService],
