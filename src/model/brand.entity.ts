@@ -24,7 +24,7 @@ export class Brand extends BaseEntity {
 
   // 생성날짜
   @CreateDateColumn()
-  @Column({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP '})
+  @Column({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   createdAt: Date;
 
   // 수정날짜
@@ -33,7 +33,7 @@ export class Brand extends BaseEntity {
   updatedAt?: Date;
 
   // 삭제날짜
-  @DeleteDateColumn()
+  @DeleteDateColumn({ name: 'deleted_at' })
   @Column({ name: 'deleted_at', type: 'timestamp', nullable: true})
   deletedAt?: Date
 }

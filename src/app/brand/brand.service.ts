@@ -21,18 +21,28 @@ export class BrandService {
   }
 
   // 생성
-  async create() {
-    return ;
+  async create(param) {
+    let brand = new Brand();
+
+    // 필요한 entity 들만 가지고와서 데이터셋팅하기
+    brand = { ...param };
+
+    // TODO: 시간 별 +9 시간 해주고, create vs save 확인해봐야함
+    // return await this.brandRepository.create(brand);
+
+    return await this.brandRepository.save(brand);
   }
 
   // 수정
-  async update(){
-    return ;
+  async update(param){
+    let brand = new Brand();
+    brand = { ...param };
+    return await this.brandRepository.update(brand.id, brand);
   }
 
   // 삭제
   async delete(id) {
-    return await this.brandRepository.softDelete({id: id});
-    return;
+    // TODO: soft delete 하는 방법 찾아보기
+    return await this.brandRepository.softDelete({ id: id });
   }
 }

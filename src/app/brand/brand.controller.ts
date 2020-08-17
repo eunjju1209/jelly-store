@@ -1,4 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Req, Request } from '@nestjs/common';
+import { BrandDto } from '../../dto/brand.dto';
+import moment from 'moment';
 
 // import { brandService } from '/src/app/brand/brand.service';
 import { BrandService } from './brand.service';
@@ -8,7 +10,7 @@ export class BrandController {
   constructor(private readonly brandService: BrandService) { }
 
   // 전체 브랜드 조회
-  @Get('/')
+  @Get('')
   async list() {
     const list = await this.brandService.list();
     return list;
@@ -24,21 +26,29 @@ export class BrandController {
 
   // 생성
   @Post()
-  create(@Body() BrandCreateDto) {
-    return  true;
+  async create(@Body() param: BrandDto) {
+    const { nation, name } = param;
+    return await this.brandService.create({ nation: nation, name: name});
   }
 
   // 수정
-  @Put()
-  update(@Param() params, @Body() BrandUpdateDto) {
-    return true;
+  @Put(':id')
+  async update(@Param() params, @Body() param: BrandDto) {
+    const { id } = params;
+
+    const brand = {
+      id: id,
+      updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+      ...param
+    };
+
+    return await this.brandService.update(brand);
   }
 
   // 삭제
   @Delete(':id')
   async delete(@Param() params) {
     const { id } = params;
-    await this.brandService.delete(id);
-    return id;
+    return await this.brandService.delete(id);
   }
 }

@@ -34,17 +34,16 @@ class ConfigService {
     return {
       type: 'mysql',
 
-      // host: this.getValue('HOST'),
-      // port: parseInt(this.getValue('PORT')),
-      // username: this.getValue('USER'),
-      // password: this.getValue('PASSWORD'),
-      // database: this.getValue('DATABASE'),
-
       host: configuration().database.host,
       port: configuration().database.port,
       username: configuration().database.user,
       password: configuration().database.password,
       database: configuration().database.database,
+
+      // database query log 확인가능
+      // default: false
+      // logging: true,
+      logging: false,
 
       entities: ['**/*.model{.ts,.js}'],
 
