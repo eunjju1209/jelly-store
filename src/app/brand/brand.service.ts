@@ -42,7 +42,9 @@ export class BrandService {
 
   // 삭제
   async delete(id) {
-    // TODO: soft delete 하는 방법 찾아보기
-    return await this.brandRepository.softDelete({ id: id });
+    // TODO: soft delete 하는 방법 찾아보기-0ㅛㄹ
+    //deleted_at
+    // return await this.brandRepository.softDelete({ id: id });
+    return await this.brandRepository.softDelete(id);
   }
 }

@@ -1,5 +1,13 @@
-import { Entity, BaseEntity } from 'typeorm';
-import { Column, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  Column,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn
+} from 'typeorm';
 import { Brand } from './brand.entity';
 
 @Entity()
@@ -26,14 +34,14 @@ export class Jelly extends BaseEntity {
   price: number;
 
   // 생성날짜
-  @Column({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp'})
   createdAt: Date
 
   // 수정날짜
-  @Column({ name: 'updated_at', type: 'timestamp', nullable: true })
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt: Date
 
   // 삭제된 날짜
-  @Column({ name: 'deleted_at', type: 'timestamp', nullable: true })
+  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true})
   deletedAt: Date
 }

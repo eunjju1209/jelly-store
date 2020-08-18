@@ -5,7 +5,7 @@ import {
     BaseEntity,
     CreateDateColumn,
     UpdateDateColumn,
-    DeleteDateColumn
+    DeleteDateColumn,
   } from "typeorm";
 
 @Entity()
@@ -19,21 +19,18 @@ export class Brand extends BaseEntity {
   nation: string;
 
   // 제조사 이름
-  @Column({ name: '', type: 'varchar', default: false })
+  @Column({ name: 'name', type: 'varchar', default: false })
   name: string;
 
   // 생성날짜
-  @CreateDateColumn()
-  @Column({ name: 'created_at', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp'})
   createdAt: Date;
 
   // 수정날짜
-  @UpdateDateColumn()
-  @Column({ name: 'updated_at', type: 'timestamp', nullable: true})
+  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
   updatedAt?: Date;
 
   // 삭제날짜
-  @DeleteDateColumn({ name: 'deleted_at' })
-  @Column({ name: 'deleted_at', type: 'timestamp', nullable: true})
-  deletedAt?: Date
+  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true})
+  deletedAt?: Date;
 }

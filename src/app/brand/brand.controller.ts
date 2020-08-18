@@ -38,7 +38,6 @@ export class BrandController {
 
     const brand = {
       id: id,
-      updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
       ...param
     };
 
@@ -49,6 +48,6 @@ export class BrandController {
   @Delete(':id')
   async delete(@Param() params) {
     const { id } = params;
-    return await this.brandService.delete(id);
+    return await this.brandService.delete({ id });
   }
 }
