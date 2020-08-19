@@ -34,14 +34,14 @@ export class Jelly extends BaseEntity {
   price: number;
 
   // 생성날짜
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp'})
+  @CreateDateColumn({ name: 'created_at', type: 'datetime'})
   createdAt: Date
 
   // 수정날짜
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp', nullable: true })
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime', nullable: true })
   updatedAt: Date
 
   // 삭제된 날짜
-  @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp', nullable: true})
+  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime', nullable: true})
   deletedAt: Date
 }

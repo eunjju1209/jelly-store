@@ -14,7 +14,7 @@ import { AuthModule } from '../auth/auth.module';
 import { User } from '../model/user.entity';
 import { UsersModule } from '../users/users.module';
 import { BrandModule } from './brand/brand.module';
-
+import { JellyModule } from './jelly/jelly.module';
 
 @Module({
   imports: [
@@ -26,6 +26,7 @@ import { BrandModule } from './brand/brand.module';
     AuthModule,
     UsersModule,
     BrandModule,
+    JellyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

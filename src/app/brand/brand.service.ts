@@ -29,7 +29,6 @@ export class BrandService {
 
     // TODO: 시간 별 +9 시간 해주고, create vs save 확인해봐야함
     // return await this.brandRepository.create(brand);
-
     return await this.brandRepository.save(brand);
   }
 
@@ -42,9 +41,6 @@ export class BrandService {
 
   // 삭제
   async delete(id) {
-    // TODO: soft delete 하는 방법 찾아보기-0ㅛㄹ
-    //deleted_at
-    // return await this.brandRepository.softDelete({ id: id });
     return await this.brandRepository.softDelete(id);
   }
 }

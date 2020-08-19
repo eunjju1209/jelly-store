@@ -32,7 +32,6 @@ export class UsersService {
   }
 
   async findById(id: number): Promise<User> {
-    console.log(`id ==> ${id}`);
     return await this.userRepository.findOne({ id: id });
   }
 }
