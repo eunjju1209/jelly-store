@@ -6,11 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { configService } from './config/config.service';
 import * as path from 'path';
-import { AuthService } from './auth/auth.service';
-import { UsersService } from './users/users.service';
+import { AuthService } from './app/auth/auth.service';
+import { UsersService } from './app/users/users.service';
 
-import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { AuthModule } from './app/auth/auth.module';
+import { UsersModule } from './app/users/users.module';
 import { BrandModule } from './app/brand/brand.module';
 import { BrandService } from './app/brand/brand.service';
 

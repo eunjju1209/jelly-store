@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Jelly } from '../../model/jelly.entity';
+import { Jelly } from '../model/jelly.entity';
 import { JellyRepository } from './jelly.repository';
 import { BrandRepository } from '../brand/brand.repository';
-import { Brand } from '../../model/brand.entity';
+import { Brand } from '../model/brand.entity';
 import { getConnection } from 'typeorm/index';
 import { isEmpty } from '@nestjs/common/utils/shared.utils';
 
@@ -18,6 +18,8 @@ export class JellyService {
 
   // 젤리 조회
   async list() {
+
+    // TODO: getConnection query 하고나서 후처리 확인하기
     const query = `
       select j.name       as name,
              j.price      as price,
@@ -34,6 +36,7 @@ export class JellyService {
 
   // 젤리 단건 조회
   async get(id) {
+    // TODO: getConnection query 하고나서 후처리 확인하기
     const query = `
       select j.name       as name,
              j.price      as price,

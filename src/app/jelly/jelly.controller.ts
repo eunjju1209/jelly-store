@@ -1,8 +1,22 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res, Response } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  Res,
+  Response,
+  SetMetadata,
+  UseGuards,
+} from '@nestjs/common';
 import { toCamel } from 'snake-camel';
 
 import { JellyService } from './jelly.service';
-import { JellyDto } from '../../dto/jelly.dto';
+import { JellyDto } from '../dto/jelly.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('jelly')
 export class JellyController {
@@ -10,12 +24,16 @@ export class JellyController {
   }
 
   // 전체 조회
+  @UseGuards(JwtAuthGuard)
+  @SetMetadata('roles', ['admin', 'user'])
   @Get('')
   async list() {
     return await this.jellyService.list();
   }
 
   // 단건 조회
+  @UseGuards(JwtAuthGuard)
+  @SetMetadata('roles', ['admin', 'user'])
   @Get(':id')
   async get(@Param() param) {
     const { id } = param;
@@ -23,12 +41,16 @@ export class JellyController {
   }
 
   // 생성
+  @UseGuards(JwtAuthGuard)
+  @SetMetadata('roles', ['admin'])
   @Post()
   async create(@Body() param: JellyDto) {
     return await this.jellyService.create(toCamel({...param}));
   }
 
   // 수정
+  @UseGuards(JwtAuthGuard)
+  @SetMetadata('roles', ['admin'])
   @Put(':id')
   async update(@Param() param, @Body() jelly:JellyDto, @Response() response) {
     const { id } = param;
@@ -49,6 +71,8 @@ export class JellyController {
   }
 
   // 삭제
+  @UseGuards(JwtAuthGuard)
+  @SetMetadata('roles', ['admin'])
   @Delete(':id')
   async delete(@Param() param) {
     const { id } = param;

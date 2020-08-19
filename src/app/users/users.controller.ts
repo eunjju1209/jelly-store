@@ -1,8 +1,7 @@
 import { Body, Controller, Request, Get, Post, Req, UseGuards, HttpStatus, Response } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { toCamel, toSnake } from 'snake-camel';
-import { User } from '../model/user.entity';
-import { UsersService } from '../users/users.service';
+import { UsersService } from './users.service';
 import { UserDto } from './user.dto';
 import { LocalAuthGuard } from '../auth/local-auth.guard';
 import { AuthService } from '../auth/auth.service';
