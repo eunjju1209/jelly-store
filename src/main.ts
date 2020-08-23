@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 
 import * as dotenv from 'dotenv';
-import { RolesGuard } from './app/guard/roles.guard';
+import { RolesGuard } from './app/guard/roles/roles.guard';
 
 dotenv.config({
   path: '../../.env',

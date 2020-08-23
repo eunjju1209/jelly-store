@@ -18,7 +18,7 @@ import { JellyModule } from './jelly/jelly.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { GuardMiddleware } from './middleware/guard.middleware';
 import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './guard/roles.guard';
+import { RolesGuard } from './guard/roles/roles.guard';
 
 @Module({
   imports: [

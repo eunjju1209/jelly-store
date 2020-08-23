@@ -43,7 +43,8 @@ export class AuthService {
     const accessToken = jwt.sign(
       {
         id: user.id,
-        userId: user.userId
+        userId: user.userId,
+        role: user.role.type
       },
       jwtConstants.secret,
       { expiresIn }

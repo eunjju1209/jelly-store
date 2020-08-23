@@ -25,7 +25,8 @@ export class JellyController {
 
   // 전체 조회
   @UseGuards(JwtAuthGuard)
-  @SetMetadata('roles', ['admin', 'user'])
+  // @SetMetadata('roles', ['admin', 'user'])
+  // @Roles('admin')
   @Get('')
   async list() {
     return await this.jellyService.list();
