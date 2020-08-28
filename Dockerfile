@@ -1,4 +1,9 @@
+# step 1
+## base image for step 1: Node 10
+FROM node:10 AS builder
+
 # /app 을 application root 로 사용합니다.
+## 프로젝트의 모든 파일을 WORKDIR(/app)로 복사한다.
 WORKDIR /app
 
 # copy . . 의미는 전체 프로젝트를 복사한다는 뜻이다.
@@ -7,8 +12,8 @@ COPY . .
 # 의존성 설치 및 프로젝트 빌드
 # 새로운 레이어 명령어 실행 및 새로운 이미지 생성..
 # 보통 패키지 설치 등 사용된다.
-RUN npm install && \
-    npm run build
+RUN npm install
+RUN npm run build
 
 # port 3000
 EXPOSE 3000
