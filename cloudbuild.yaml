@@ -4,9 +4,15 @@
 
 # cloudbuild 에 기본적인 조합은 steps -> { name, args } 기본적인 조합으로 알 수 있다.
 steps:
-  - name: 'docker/compose:1.19.0'
-    args: ['up', '-d']
-  - name: 'asia.gcr.io/industrial-keep-279205/jellystore'
-    args: ['tag', 'jellystore:latest', 'asia.gcr.io/industrial-keep-279205/jellystore:latest']
+  - name: 'gcr.io/cloud-builders/docker'
+    args:  ['build', '-t', 'asia.gcr.io/industrial-keep-279205/jellystore', '.']
+  # 도커빌드 후, push 명령어를 호출
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'asia.gcr.io/industrial-keep-279205/jellystore']
+# 빌드 구성 파일에서 이미지 빌드를 위한 빌드 단계를 추가하고 빌드된 이미지를 지정하는 images 필드를 추가합니다
+# 후에, Container Registry에 이미지가 저장된다.
+# 다음 스니펫은 이미지를 빌드하고 이를 Container Registry에 저장하기 위한 빌드 구성을 보여줍니다.
+# build -> push ->
 images:
-  -'asia.gcr.io/industrial-keep-279205/jellystore:latest'
+  -'asia.gcr.io/industrial-keep-279205/jellystore'
+
