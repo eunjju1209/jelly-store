@@ -6,7 +6,7 @@
 steps:
   - name: 'docker/compose:1.19.0'
     args: ['up', '-d']
-  - name: 'asia.gcr.io/industrial-keep-279205/jellystire'
+  - name: 'asia.gcr.io/industrial-keep-279205/jellystore'
     args: ['tag', 'jellystore:latest', 'asia.gcr.io/industrial-keep-279205/jellystire:latest']
 images:
   -'asia.gcr.io/industrial-keep-279205/jellystore:latest'
