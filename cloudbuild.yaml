@@ -8,4 +8,5 @@ steps:
     args: ['up', '-d']
   - name: 'asia.gcr.io/industrial-keep-279205/jellystire'
     args: ['tag', 'jellystore:latest', 'asia.gcr.io/industrial-keep-279205/jellystire:latest']
-    images: ['asia.gcr.io/industrial-keep-279205/jellystore:latest']
+images:
+  -'asia.gcr.io/industrial-keep-279205/jellystore:latest'
