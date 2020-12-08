@@ -21,4 +21,4 @@ EXPOSE 3000
 # default 명령어? 파라미터 설정
 # docker run 실행시 커맨드 주지 않으면 default 명령이 실행된다.
 # cmd 주용도는 컨테이너 실행할 때 사용할 default 설정하는것이다.
-CMD node dist/src/main
+CMD node src/main

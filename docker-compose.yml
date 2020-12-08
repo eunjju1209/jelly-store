@@ -21,6 +21,9 @@ services:
       # TODO: gcp 에  올리고 이미지를  gcp 에서 받아서 실행 시켜보자
       image: jellystore
       container_name: jellystore
+      volumes:
+        - ./src:/usr/app/
+        - /usr/app/node_modules
       ports:
-        - "80:8080"
+        - "3000:3000"
 
